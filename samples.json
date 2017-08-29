@@ -1,0 +1,77 @@
+{
+	"questions": [
+		 {
+			"category": "Entertainment: Film",
+			"type": "multiple",
+			"difficulty": "easy",
+			"question": "Who directed E.T. the Extra-Terrestial (1982)?",
+			"correct_answer": "Steven Spielberg",
+			"incorrect_answers": [
+				"James Cameroon",
+				"Stanley Johns",
+				"Tim Burton",
+				"Steven Spielberg"
+			]
+		},
+		 {
+			"category": "Science & Nature",
+			"type": "multiple",
+			"difficulty": "easy",
+			"question": "What is the hottest planet in the Solar System?",
+			"correct_answer": "Venus",
+			"incorrect_answers": [
+				"Venus",
+				"Mars",
+				"Mercury",
+				"Jupiter"
+			]
+		},
+		 {
+			"category": "Entertainment: Books",
+			"type": "multiple",
+			"difficulty": "easy",
+			"question": "Under what pseudonym did Stephen King publish five novels between 1977 and 1984?",
+			"correct_answer": "Richard Bachman",
+			"incorrect_answers": [
+				"Richard Bachman",
+				"J. D. Robb",
+				"Mark Twain",
+				"Lewis Carroll"
+			]
+		},
+		 {
+			"category": "History",
+			"type": "multiple",
+			"difficulty": "medium",
+			"question": "The Herero genocide was perpetrated in Africa by which of the following colonial nations?",
+			"correct_answer": "Germany",
+			"incorrect_answers": [
+				"Belgium",
+				"Britain",
+				"Germany",
+				"France"
+			]
+		},
+		{
+			"category": "Sports",
+			"type": "single",
+			"placeholder": "enter the numerical value only",
+			"difficulty": "hard",
+			"question": "Leonard Bias, an All-American college basketball forward, died in 1986 aged 22 years. What was his listed height (in metres) at the time of his death?",
+			"correct_answer": "2.06"
+		},
+		{
+			"category": "History",
+			"type": "multiple",
+			"difficulty": "medium",
+			"question": "Which year was the Space Shuttle Challenger Disaster?",
+			"correct_answer": "1986",
+			"incorrect_answers": [
+				"2003",
+				"1987",
+				"1986",
+				"1967"
+			]
+		}
+	]
+}

@@ -1,17 +1,39 @@
 <template>
   <div id="app" class="body">
-    <div class="sky-form" v-for="(quiz, index) in quizes" v-show="index === questionIndex">
+    <div class="sky-form" v-for="(quiz, index) in quizes" v-show="index === questionIndex" :key="index">
+      <div class="rating">
+        <input type="radio" name="stars-rating" id="stars-rating-5" :checked="quiz.difficulty == 'ninja'" disabled>
+        <label for="stars-rating-5"><i class="icon-star"></i></label>
+        <input type="radio" name="stars-rating" id="stars-rating-4" :checked="quiz.difficulty == 'expert'" disabled>
+        <label for="stars-rating-4"><i class="icon-star"></i></label>
+        <input type="radio" name="stars-rating" id="stars-rating-3" :checked="quiz.difficulty == 'hard'" disabled>
+        <label for="stars-rating-3"><i class="icon-star"></i></label>
+        <input type="radio" name="stars-rating" id="stars-rating-2" :checked="quiz.difficulty == 'medium'" disabled>
+        <label for="stars-rating-2"><i class="icon-star"></i></label>
+        <input type="radio" name="stars-rating" id="stars-rating-1" :checked="quiz.difficulty == 'easy'" disabled>
+        <label for="stars-rating-1"><i class="icon-star"></i></label>
+			</div>
       <header>{{ quiz.category }}</header>
       <h2 class="input">{{ quiz.question }}</h2>
       <fieldset>
         <section>
           <div class="row">
-            <div class="col col-4">
+            <div class="col col-4" v-if="quiz.type == 'multiple'">
               <ol style="text-align:left">
-                <li v-for="answer in quiz.incorrect_answers">
+                <li v-for="answer in quiz.incorrect_answers" :key="answer">
                   <label class="radio"><input type="radio" name="answer" v-model="answers[index]" :value="answer"><i></i>{{  answer }}</label>
                 </li>
               </ol>
+            </div>
+            <div class="col" v-else-if="quiz.type == 'checkbox'">
+              <span>
+                
+              </span>
+            </div>
+            <div class="col col-8" v-else>
+              <span style="text-align:left">
+                <label class="input"><input :placeholder="quiz.placeholder" type="text" name="answer" v-model="answers[index]"><i></i>{{  answers[index] }}</label>
+              </span>
             </div>
           </div>
         </section>
@@ -32,45 +54,27 @@
 </template>
 
 <script>
-let quiz_questions = [
-  {
-    "category": "Entertainment: Film",
-    "type": "multiple",
-    "difficulty": "easy",
-    "question": "Who directed \'E.T. the Extra-Terrestial' (1982)?",
-    "correct_answer": "Steven Spielberg",
-    "incorrect_answers": [
-      "Steven Spielberg",
-      "Stanley Johns",
-      "Tim Burton",
-      "James Cameroon"
-    ]
-  },
-  {
-    "category": "Science & Nature",
-    "type": "multiple",
-    "difficulty": "easy",
-    "question": "What is the hottest planet in the Solar System?",
-    "correct_answer": "Venus",
-    "incorrect_answers": [
-      "Venus",
-      "Mars",
-      "Mercury",
-      "Jupiter"
-    ]
-  },
-]
+import { quiz_questions, store, questionsRef } from './store.js'
 
 export default {
   name: 'app',
+  firebase: {
+    quizes: questionsRef.limitToLast(25)
+  },
   data: () => {
     return {
       questionIndex: 0,
-      quizes: quiz_questions,
+      //quizes: quiz_questions,
       answers: Array(quiz_questions.length).fill(''),
     }
   },
+  created() {
+    store.on('data-updated', this.updateQuestions)
+  },
   methods: {
+    updateQuestions: function (questions) {
+      this.quizes = questions
+    },
     next: function() {
       this.questionIndex++;
     },
